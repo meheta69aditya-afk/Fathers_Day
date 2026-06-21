@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="or">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Father's Day, Papa!</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: #f7f9fc;
+            color: #333;
+            overflow-x: hidden;
+        }
+
+        /* Cover Page Styling */
+        .cover-section {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(135deg, #1a2a6c, #b21f1f, #fdbb2d);
+            padding: 20px;
+            text-align: center;
+            position: relative;
+        }
+
+        .cover-card {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 25px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            max-width: 450px;
+            width: 100%;
+            transform: translateY(0);
+            transition: transform 0.3s ease;
+        }
+
+        .cover-image {
+            width: 100%;
+            height: auto;
+            max-height: 350px;
+            object-fit: cover;
+            border-radius: 12px;
+            border: 4px solid #fff;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+        }
+
+        .cover-title {
+            margin-top: 20px;
+            font-size: 1.8rem;
+            color: #1a2a6c;
+            font-weight: bold;
+        }
+
+        .btn-primary {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 12px 30px;
+            background: #b21f1f;
+            color: white;
+            border: none;
+            border-radius: 25px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            text-decoration: none;
+            box-shadow: 0 4px 15px rgba(178, 31, 31, 0.4);
+            transition: all 0.2s ease;
+        }
+
+        .btn-primary:hover, .btn-primary:active {
+            background: #1a2a6c;
+            transform: scale(1.05);
+        }
+
+        /* Main Content Section */
+        .content-section {
+            padding: 60px 20px;
+            max-width: 700px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .video-container {
+            position: relative;
+            padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
+            height: 0;
+            overflow: hidden;
+            border-radius: 15px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+            background: #000;
+            margin-bottom: 40px;
+        }
+
+        .video-container video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        /* Reveal Surprise Styling */
+        .reveal-container {
+            margin-top: 30px;
+        }
+
+        .btn-surprise {
+            padding: 12px 35px;
+            background: #fdbb2d;
+            color: #1a2a6c;
+            border: none;
+            border-radius: 25px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(253, 187, 45, 0.4);
+            transition: all 0.2s ease;
+        }
+
+        .btn-surprise:hover {
+            transform: scale(1.05);
+        }
+
+        .surprise-note {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s ease-out, opacity 0.5s ease-out;
+            opacity: 0;
+            background: white;
+            padding: 0 25px;
+            border-radius: 15px;
+            margin-top: 20px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+            text-align: left;
+            line-height: 1.8;
+            font-size: 1.15rem;
+            color: #444;
+            border-left: 5px solid #fdbb2d;
+        }
+
+        .surprise-note.show {
+            max-height: 500px;
+            padding: 25px;
+            opacity: 1;
+        }
+
+        /* Confetti Canvas Overlay */
+        #confetti-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: 999;
+            pointer-events: none;
+        }
+    </style>
+</head>
+<body>
+
+    <canvas id="confetti-canvas"></canvas>
+
+    <section class="cover-section">
+        <div class="cover-card">
+            <img src="./cover.jpeg" alt="Papa" class="cover-image" onerror="this.onerror=null; this.src='./cover.jpg';">
+            <h1 class="cover-title">Happy Father's Day, Papa! ❤️</h1>
+            <button class="btn-primary" onclick="openCard()">Open Card ✨</button>
+        </div>
+    </section>
+
+    <section id="inside-content" class="content-section">
+        
+        <div class="video-container">
+            <video controls preload="metadata">
+                <source src="./video.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+        </div>
+
+        <div class="reveal-container">
+            <button class="btn-surprise" onclick="revealSurprise()">Reveal Surprise 🎁</button>
+            <div id="secret-note" class="surprise-note">
+                <p>ହାପି ଫାଦର୍ସ ଡେ, ପାପา। ଆପଣ ଆମ ପାଇଁ ସବୁବେଳେ ସର୍ବଶ୍ରେଷ୍ଠ। ଆମ ମଧ୍ୟରେ ଯେତେ ମତଭେଦ କିମ୍ବା ଝଗଡ଼ା ହେଉନା କାହିଁକି, ଆମେ ଦୁହେଁ ନିଜକୁ ବହୁତ ଭାଗ୍ୟଶାଳୀ ମନେ କରୁଛୁ ଯେ ଆପଣ ଆମର ବାପା। ଆପଣଙ୍କ ଭଳି ବାପା ପାଇଥିବାରେ ଆମେ ଗର୍ବିତ। ଆମେ ଆପଣଙ୍କୁ ବହୁତ ଭଲପାଉଛୁ। ❤️</p>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        function openCard() {
+            document.getElementById('inside-content').scrollIntoView({ behavior: 'smooth' });
+            startConfetti();
+        }
+
+        function revealSurprise() {
+            const note = document.getElementById('secret-note');
+            note.classList.toggle('show');
+            if(note.classList.contains('show')) {
+                startConfetti();
+            }
+        }
+
+        // Custom Optimized Confetti System for Mobile
+        const canvas = document.getElementById('confetti-canvas');
+        const ctx = canvas.getContext('2d');
+        let confetti = [];
+        let animationFrameId = null;
+
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+        window.addEventListener('resize', resizeCanvas);
+        resizeCanvas();
+
+        function createConfettiPiece() {
+            const colors = ['#fdbb2d', '#b21f1f', '#1a2a6c', '#4ed164', '#ff7675'];
+            return {
+                x: Math.random() * canvas.width,
+                y: Math.random() * -canvas.height - 20,
+                rotation: Math.random() * 360,
+                color: colors[Math.floor(Math.random() * colors.length)],
+                width: Math.random() * 8 + 6,
+                height: Math.random() * 12 + 8,
+                speed: Math.random() * 4 + 4,
+                rotationSpeed: Math.random() * 4 - 2
+            };
+        }
+
+        function startConfetti() {
+            confetti = [];
+            for (let i = 0; i < 100; i++) {
+                confetti.push(createConfettiPiece());
+            }
+            if (!animationFrameId) {
+                updateConfetti();
+            }
+        }
+
+        function updateConfetti() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            let active = false;
+
+            confetti.forEach((p) => {
+                if (p.y < canvas.height) {
+                    active = true;
+                    p.y += p.speed;
+                    p.rotation += p.rotationSpeed;
+                    
+                    ctx.save();
+                    ctx.translate(p.x, p.y);
+                    ctx.rotate((p.rotation * Math.PI) / 180);
+                    ctx.fillStyle = p.color;
+                    ctx.fillRect(-p.width / 2, -p.height / 2, p.width, p.height);
+                    ctx.restore();
+                }
+            });
+
+            if (active) {
+                animationFrameId = requestAnimationFrame(updateConfetti);
+            } else {
+                cancelAnimationFrame(animationFrameId);
+                animationFrameId = null;
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+            }
+        }
+    </script>
+</body>
+</html>
